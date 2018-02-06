@@ -20,7 +20,7 @@ RUN yum -y install yum-utils
 RUN yum update
 
 RUN yum-config-manager --enable remi-php72
-RUN yum -y install php php-opcache php-gd php-pdo php-mysqli php-mcrypt
+RUN yum -y install php php-opcache php-gd php-pdo php-mysqli php-mcrypt php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-soap curl curl-devel
 
 # configure php
 RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
