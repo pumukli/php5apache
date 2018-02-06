@@ -1,3 +1,5 @@
+# php 7.2 apache httpd
+
 FROM centos:7.0.1406
 MAINTAINER Márton Róbert <robert.marton@gmail.com>
 
