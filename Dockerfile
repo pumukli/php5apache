@@ -4,17 +4,17 @@ FROM centos:7.0.1406
 MAINTAINER Márton Róbert <robert.marton@gmail.com>
 
 # add the EPEL repo
-RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && 
-    yum -y install epel-release
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* 
+RUN yum -y install epel-release
 
 # install apache
 RUN yum -y install httpd
-RUN systemctl start httpd.service &&
-    systemctl enable httpd.service
+RUN systemctl start httpd.service 
+RUN systemctl enable httpd.service
 
-RUN firewall-cmd --permanent --zone=public --add-service=http &&
-    firewall-cmd --permanent --zone=public --add-service=https &&
-    firewall-cmd --reload
+RUN firewall-cmd --permanent --zone=public --add-service=http 
+RUN firewall-cmd --permanent --zone=public --add-service=https 
+RUN firewall-cmd --reload
 
 # install php
 RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
