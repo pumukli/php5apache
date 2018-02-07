@@ -3,10 +3,6 @@
 FROM centos:7.0.1406
 MAINTAINER Márton Róbert <robert.marton@gmail.com>
 
-# add the EPEL repo
-RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* 
-RUN yum -y install epel-release
-
 # install apache
 RUN yum -y install httpd
 RUN systemctl start httpd.service 
