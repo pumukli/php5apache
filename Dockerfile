@@ -25,7 +25,7 @@ EXPOSE 80
 #RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum -y install yum-utils
-RUN yum update
+RUN yum -y update
 
 RUN yum -y install php72.x86_64 php72-php-cli.x86_64 php72-php-common.x86_64 php72-php-devel.x86_64 php72-php-gd.x86_64 php72-php-bcmath.x86_64 php72-php-imap.x86_64 php72-php-json.x86_64 php72-php-ldap.x86_64 php72-php-mbstring.x86_64 php72-php-mysqlnd.x86_64 php72-php-pdo.x86_64 php72-php-pdo-dblib.x86_64 php72-php-soap.x86_64 php72-php-xml.x86_64 php72-php-xmlrpc.x86_64 php72-php-opcache.x86_64
 
