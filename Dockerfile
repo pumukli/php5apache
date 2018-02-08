@@ -19,10 +19,6 @@ CMD ["/usr/sbin/init"]
 # install apache
 RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 
-RUN firewall-cmd --permanent --zone=public --add-service=http 
-RUN firewall-cmd --permanent --zone=public --add-service=https 
-RUN firewall-cmd --reload
-
 EXPOSE 80
 
 # install php
