@@ -33,6 +33,6 @@ RUN yum -y install curl curl-devel php72 php72-cli php72-common php72-devel php7
 #RUN yum -y install php72 php72-opcache php-gd php-pdo php-mysqli php-mcrypt php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-soap curl curl-devel
 
 # configure php
-RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
+#RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
 
 CMD ["/usr/sbin/init"]
