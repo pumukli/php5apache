@@ -1,6 +1,7 @@
 # php 7.2 apache httpd
 
-FROM centos:7.0.1406
+FROM centos:7
+ENV container docker
 MAINTAINER Márton Róbert <robert.marton@gmail.com>
 
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
@@ -16,13 +17,13 @@ VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
 
 # install apache
-RUN yum -y install httpd
-RUN systemctl start httpd.service 
-RUN systemctl enable httpd.service
+RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 
 RUN firewall-cmd --permanent --zone=public --add-service=http 
 RUN firewall-cmd --permanent --zone=public --add-service=https 
 RUN firewall-cmd --reload
+
+EXPOSE 80
 
 # install php
 RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
@@ -38,5 +39,5 @@ RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.
 # restart apache
 RUN systemctl restart httpd.service
 
-EXPOSE 80
+
 CMD ["/usr/sbin/init"]
