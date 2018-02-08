@@ -22,18 +22,17 @@ RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 EXPOSE 80
 
 # install php
-RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+#RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum -y install yum-utils
 RUN yum update
 
-RUN yum-config-manager --enable remi-php72
-RUN yum -y install php php-opcache php-gd php-pdo php-mysqli php-mcrypt php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-soap curl curl-devel
+RUN yum -y install php72.x86_64 php72-php-cli.x86_64 php72-php-common.x86_64 php72-php-devel.x86_64 php72-php-gd.x86_64 php72-php-bcmath.x86_64 php72-php-imap.x86_64 php72-php-json.x86_64 php72-php-ldap.x86_64 php72-php-mbstring.x86_64 php72-php-mysqlnd.x86_64 php72-php-pdo.x86_64 php72-php-pdo-dblib.x86_64 php72-php-soap.x86_64 php72-php-xml.x86_64 php72-php-xmlrpc.x86_64 php72-php-opcache.x86_64
+
+#RUN yum-config-manager --enable remi-php72
+#RUN yum -y install php72 php72-opcache php-gd php-pdo php-mysqli php-mcrypt php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-soap curl curl-devel
 
 # configure php
 RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
-
-# restart apache
-RUN systemctl restart httpd.service
-
 
 CMD ["/usr/sbin/init"]
