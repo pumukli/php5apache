@@ -4,10 +4,7 @@ FROM php:7-apache
 
 MAINTAINER Márton Róbert <robert.marton@dlms.com>
 
-
-
-
-RUN docker-php-ext-install mysqli pdo_mysql bcmath bz2 calendar ctype curl dba dom enchant exif fileinfo filter ftp gd \
+RUN docker-php-ext-install mysqli pdo_mysql bcmath calendar ctype curl dba dom enchant exif fileinfo filter ftp gd \
     && gettext gmp hash iconv imap interbase intl json ldap mbstring oci8 odbc opcache pcntl pdo pdo_dblib pdo_firebird \
     && pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pgsql phar \
     && reflection session simplexml soap sockets spl standard \
