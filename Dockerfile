@@ -1,31 +1,15 @@
 # php 7.2 apache httpd
 
-FROM centos:latest
-ENV container docker
-MAINTAINER Márton Róbert <robert.marton@gmail.com>
+FROM php:7-apache
 
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-rm -f /lib/systemd/system/multi-user.target.wants/*;\
-rm -f /etc/systemd/system/*.wants/*;\
-rm -f /lib/systemd/system/local-fs.target.wants/*; \
-rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-rm -f /lib/systemd/system/basic.target.wants/*;\
-rm -f /lib/systemd/system/anaconda.target.wants/*;
-VOLUME [ "/sys/fs/cgroup" ]
-CMD ["/usr/sbin/init"]
+MAINTAINER Márton Róbert <robert.marton@dlms.com>
 
-# install apache
-RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
-
-EXPOSE 80
-
-# install php
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum -y install yum-utils
-RUN yum -y update
-
-RUN yum -y install curl curl-devel php72 php72-cli php72-common php72-devel php72-gd php72-bcmath php72-imap php72-json php72-ldap php72-mbstring php72-mysqlnd php72-pdo php72-dblib php72-soap php72-xml php72-xmlrpc php72-opcache
+RUN docker-php-ext-install mysqli pdo_mysql curl curl-devel php-gd php-bcmath php-imap php-json php-ldap php-mbstring php-mysqlnd php-pdo php-dblib php-soap php-xml php-xmlrpc php-opcach 
+RUN pecl install xdebug \
+ && docker-php-ext-enable xdebug
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo "xdebug.idekey=netbeans-xdebug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
 
 CMD ["/usr/sbin/init"]
