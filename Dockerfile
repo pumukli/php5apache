@@ -1,6 +1,6 @@
 # php 7.2 apache httpd
 
-FROM centos:7
+FROM centos:latest
 ENV container docker
 MAINTAINER Márton Róbert <robert.marton@gmail.com>
 
@@ -22,17 +22,10 @@ RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 EXPOSE 80
 
 # install php
-#RUN rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum -y install yum-utils
 RUN yum -y update
 
 RUN yum -y install curl curl-devel php72 php72-cli php72-common php72-devel php72-gd php72-bcmath php72-imap php72-json php72-ldap php72-mbstring php72-mysqlnd php72-pdo php72-dblib php72-soap php72-xml php72-xmlrpc php72-opcache
-
-#RUN yum-config-manager --enable remi-php72
-#RUN yum -y install php72 php72-opcache php-gd php-pdo php-mysqli php-mcrypt php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-soap curl curl-devel
-
-# configure php
-#RUN echo "date.timezone = Europe/Budapest" > /usr/local/etc/php/conf.d/timezone.ini
 
 CMD ["/usr/sbin/init"]
