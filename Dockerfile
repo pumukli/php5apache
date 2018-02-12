@@ -4,7 +4,14 @@ FROM php:7-apache
 
 MAINTAINER Márton Róbert <robert.marton@dlms.com>
 
-RUN docker-php-ext-install mysqli pdo_mysql curl curl-devel php-gd php-bcmath php-imap php-json php-ldap php-mbstring php-mysqlnd php-pdo php-dblib php-soap php-xml php-xmlrpc php-opcach 
+
+
+
+RUN docker-php-ext-install mysqli pdo_mysql bcmath bz2 calendar ctype curl dba dom enchant exif fileinfo filter ftp gd \
+    && gettext gmp hash iconv imap interbase intl json ldap mbstring oci8 odbc opcache pcntl pdo pdo_dblib pdo_firebird \
+    && pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pgsql phar \
+    && reflection session simplexml soap sockets spl standard \
+    && xml xmlreader xmlrpc xmlwriter xsl zip
 RUN pecl install xdebug \
  && docker-php-ext-enable xdebug
 RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
