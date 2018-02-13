@@ -6,8 +6,8 @@ MAINTAINER Márton Róbert <robert.marton@dlms.com>
 
 RUN docker-php-ext-install mysqli pdo_mysql bcmath calendar ctype dba dom enchant exif fileinfo filter ftp gd \
     && gettext gmp hash iconv imap intl json ldap mbstring opcache pcntl pdo pdo_dblib \
-    && pdo_odbc phar reflection session simplexml soap sockets spl standard \
-    && xml xmlreader xmlrpc xmlwriter xsl zip
+    && pdo_odbc phar reflection session soap sockets spl standard \
+    && zip
     
 RUN pecl install xdebug \
  && docker-php-ext-enable xdebug
